@@ -14,16 +14,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-     <h1 class="heading">
-        The easy way to convert your text or documents into HTML online
-      </h1>
-      <p class="introPara">
-        Are you fed up with the time and hassle of formatting text for the web?
-        Our service lets you convert your text or document files to clean HTML
-        instantly. Our basic service is free to use but go PRO if you need more
-        features like <a href="">converting Word or PDF documents</a>.
-        <a href="">Check out our PRO version...</a>
-      </p>
+    <h1 class="heading">
+      The easy way to convert your text or documents into HTML online
+    </h1>
+    <p class="introPara">
+      Are you fed up with the time and hassle of formatting text for the web?
+      Our service lets you convert your text or document files to clean HTML
+      instantly. Our basic service is free to use but go PRO if you need more
+      features like <a href="">converting Word or PDF documents</a>.
+      <a href="">Check out our PRO version...</a>
+    </p>
     <div class="container">
       <div class="editorBox">
         <div class="options">
@@ -96,21 +96,47 @@
           <button id="outdent" class="option-button spacing">
             <i class="fa-solid fa-outdent"></i>
           </button>
-          <button id="headingOptions" class="optionButton">
-            <i class="fa-solid fa-heading"></i>
-          </button>
-          <button class="optionButton"><i class="fa-solid fa-font"></i></button>
+          <button class="option-button deleteText" id="deleteText"><i class="fa-solid fa-eraser"></i></button>
 
-          <select id="headingOptions" class="advOptionButton">
-            <option value="H1">H1</option>
-            <option value="H2">H2</option>
-            <option value="H3">H3</option>
-            <option value="H4">H4</option>
-            <option value="H5">H5</option>
-            <option value="H6">H6</option>
+          <select id="fontName" class="advOptionButton">
+
+            <option
+              value="Arial"
+              style="font-family: Arial, Helvetica, sans-serif"
+            >
+              Arial
+            </option>
+            <option
+              value="Verdana"
+              style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+            >
+              Verdana
+            </option>
+            <option
+              value="Times New Roman"
+              style="font-family: 'Times New Roman', Times, serif"
+            >
+              Times New Roman
+            </option>
+            <option value="Garamond" style="font-family: Garamond">
+              Garamond
+            </option>
+            <option
+              value="Georgia"
+              style="font-family: Georgia, 'Times New Roman', Times, serif"
+            >
+              Georgia
+            </option>
+            <option
+              value="Courier New"
+              style="font-family: 'Courier New', Courier, monospace"
+            >
+              Courier New
+            </option>
+            <option value="cursive" style="font-family: cursive">
+              cursive
+            </option>
           </select>
-
-          <select id="fontName" class="advOptionButton"></select>
           <select id="fontSize" class="advOptionButton"></select>
 
           <div class="inputWrapper">
