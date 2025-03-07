@@ -27,7 +27,7 @@ for (let i = 1; i <= 7; i++) {
   fontSize.value = 3;
 }
 
-const modifyText = (command, defaultUi, value) => {
+function modifyText(command, defaultUi, value) {
   document.execCommand(command, defaultUi, value);
 };
 
@@ -72,10 +72,6 @@ alignJustify.addEventListener("click", () => {
 alignCenter.addEventListener("click", () => {
   writingArea.style.textAlign = "center";
 });
-
-listOl.addEventListener("click",()=>{
-  // writingArea.execCommand("insertorderedlist", false, null);
-},false);
 
 linkInsert.addEventListener("click", () => {
   let userLink = prompt("Enter a URL");
