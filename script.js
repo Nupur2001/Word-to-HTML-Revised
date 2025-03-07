@@ -14,31 +14,10 @@ let alignLeft = document.querySelector("#alignLeft");
 let alignJustify = document.querySelector("#alignJustify");
 let alignCenter = document.querySelector("#alignCenter");
 let alignRight = document.querySelector("#alignRight");
+let listUl = document.querySelector("#listUl");
+let listOl = document.querySelector("#listOl");
+let deleteText = document.querySelector("#deleteText");
 
-let fontList = [
-  "Arial",
-  "Verdana",
-  "Times New Roman",
-  "Garamond",
-  "Georgia",
-  "Courier New",
-  "cursive",
-];
-
-const initialiser = () => {
-  hightlighter(alignButtons, true);
-  hightlighter(scriptButtons, true);
-  hightlighter(formatButtons, false);
-  hightlighter(spacingButtons, true);
-  hightlighter(clone, true);
-
-  fontList.map((value) => {
-    let option = document.createElement("option");
-    option.value = value;
-    option.innerHTML = value;
-    fontName.appendChild(option);
-  });
-};
 
 for (let i = 1; i <= 7; i++) {
   let option = document.createElement("option");
@@ -94,6 +73,10 @@ alignCenter.addEventListener("click", () => {
   writingArea.style.textAlign = "center";
 });
 
+listOl.addEventListener("click",()=>{
+  // writingArea.execCommand("insertorderedlist", false, null);
+},false);
+
 linkInsert.addEventListener("click", () => {
   let userLink = prompt("Enter a URL");
   if (/http/i.test(userLink)) {
@@ -104,30 +87,7 @@ linkInsert.addEventListener("click", () => {
   }
 });
 
-const hightlighter = (className, needRemove) => {
-  className.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (needRemove) {
-        let alreadyActive = false;
+deleteText.addEventListener("click",()=>{
+  writingArea.innerHTML=""
+});
 
-        if (button.classList.contains("active")) {
-          alreadyActive = true;
-        }
-
-        hightlighterRemover(className);
-        if (!alreadyActive) {
-          button.classList.add("active");
-        } else {
-          button.classList.toggle("active");
-        }
-      }
-    });
-  });
-};
-
-let hightlighterRemover = (className) => {
-  className.forEach((button) => {
-    button.classList.remove("active");
-  });
-};
-window.onload = initialiser();
