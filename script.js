@@ -18,37 +18,61 @@ document.addEventListener("DOMContentLoaded", () => {
   let body = document.body;
   let HtmlEditorBox = document.querySelector(".HtmlEditorBox");
   let theme = localStorage.getItem("theme");
+let newDoc = document.querySelector("#newDoc");
 
   function updateHtmlEditor() {
     let textEntered = writingArea.innerHTML;
     htmlCode.textContent = textEntered;
+    headings();
     savetextEditorContent();
   }
+
+
+  // var menu = document.getElementById("headingTags");
+  // menu.addEventListener("change", generateData);
+
+  // function generateData() {
+  //   let textEntered = writingArea.innerHTML;
+
+  //   if (menu.value == "H1") {
+  //     htmlCode.textContent = `<H1>${textEntered}</H1>`;
+  //   } else if (menu.value == "H2") {
+  //     htmlCode.textContent = `<H2>${textEntered}</H2>`;
+  //   } else if (menu.value == "H3") {
+  //     htmlCode.textContent = `<H3>${textEntered}</H3>`;
+  //   } else if (menu.value == "H4") {
+  //     htmlCode.textContent = `<H4>${textEntered}</H4>`;
+  //   } else if (menu.value == "H5") {
+  //     htmlCode.textContent = `<H5>${textEntered}</H5>`;
+  //   } else if (menu.value == "H6") {
+  //     htmlCode.textContent = `<H6>${textEntered}</H6>`;
+  //   }
+  //   else{
+  //     console.log("default")
+  //   }
+  // }
+
   writingArea.addEventListener("keyup", updateHtmlEditor);
 
   function savetextEditorContent() {
     localStorage.setItem("Text Entered", writingArea.innerHTML);
   }
   function loadtextEditorContent() {
-    let savedText=localStorage.getItem("Text Entered");
+    let savedText = localStorage.getItem("Text Entered");
     if (savedText) {
       writingArea.innerHTML = savedText;
     }
   }
 
-
-function saveHtmlCode(){
-  localStorage.setItem("HTML Code", htmlCode.textContent)
-} 
-function loadHtmlCode(){
-  let savedHtmlCode = localStorage.getItem("HTML Code");
-  if (savedHtmlCode) {
-    htmlCode.textContent = savedHtmlCode;
+  function saveHtmlCode() {
+    localStorage.setItem("HTML Code", htmlCode.textContent);
   }
-}
-
-
-
+  function loadHtmlCode() {
+    let savedHtmlCode = localStorage.getItem("HTML Code");
+    if (savedHtmlCode) {
+      htmlCode.textContent = savedHtmlCode;
+    }
+  }
 
   for (let i = 1; i <= 7; i++) {
     let option = document.createElement("option");
@@ -61,9 +85,8 @@ function loadHtmlCode(){
   function modifyText(command, defaultUi, value) {
     document.execCommand(command, defaultUi, value);
     updateHtmlEditor;
-     savetextEditorContent();
+    savetextEditorContent();
     saveHtmlCode();
-
   }
 
   optionButton.forEach((button) => {
@@ -71,8 +94,7 @@ function loadHtmlCode(){
       modifyText(button.id, false, null);
       updateHtmlEditor();
       savetextEditorContent();
-    saveHtmlCode();
-
+      saveHtmlCode();
     });
   });
 
@@ -81,8 +103,7 @@ function loadHtmlCode(){
       modifyText(button.id, false, button.value);
       updateHtmlEditor();
       savetextEditorContent();
-    saveHtmlCode();
-
+      saveHtmlCode();
     });
   });
 
@@ -91,8 +112,7 @@ function loadHtmlCode(){
       modifyText(button.id, false, button.value);
       updateHtmlEditor();
       savetextEditorContent();
-    saveHtmlCode();
-
+      saveHtmlCode();
     });
   });
 
@@ -105,7 +125,7 @@ function loadHtmlCode(){
 
   alignRight.addEventListener("click", () => {
     writingArea.style.textAlign = "right";
-    htmlCode.textContent=document.execCommand("JustifyRight");
+    htmlCode.textContent = document.execCommand("JustifyRight");
     updateHtmlEditor();
     savetextEditorContent();
     saveHtmlCode();
@@ -194,6 +214,12 @@ function loadHtmlCode(){
       console.log("lightmode");
     }
   });
+
+  newDoc.addEventListener('click',()=>{
+    writingArea.innerHTML = "";
+    htmlCode.textContent = "";
+  })
+
 
   loadtextEditorContent();
   loadHtmlCode();
