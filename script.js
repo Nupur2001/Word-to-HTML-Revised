@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let HtmlEditorBox = document.querySelector(".HtmlEditorBox");
   let theme = localStorage.getItem("theme");
 let newDoc = document.querySelector("#newDoc");
+let para=document.querySelector('#para')
 
   function updateHtmlEditor() {
     let textEntered = writingArea.innerHTML;
@@ -229,6 +230,9 @@ let newDoc = document.querySelector("#newDoc");
     htmlCode.textContent = "";
   })
 
+  para.addEventListener('click',()=>{
+    htmlCode.textContent = `<p>${writingArea.innerHTML}</p>`;
+  })
 
   loadtextEditorContent();
   loadHtmlCode();
