@@ -23,9 +23,13 @@ let newDoc = document.querySelector("#newDoc");
   function updateHtmlEditor() {
     let textEntered = writingArea.innerHTML;
     htmlCode.textContent = textEntered;
-    headings();
+    // headings();
     savetextEditorContent();
   }
+
+
+
+  // function alignLeft()
 
 
   // var menu = document.getElementById("headingTags");
@@ -122,17 +126,20 @@ let newDoc = document.querySelector("#newDoc");
     updateHtmlEditor();
     // }
   });
+    function textAlign(align) {
+      document.execCommand("justify" + align);
+    }
 
   alignRight.addEventListener("click", () => {
-    writingArea.style.textAlign = "right";
-    htmlCode.textContent = document.execCommand("JustifyRight");
+   textAlign("right")
     updateHtmlEditor();
     savetextEditorContent();
     saveHtmlCode();
   });
 
   alignCenter.addEventListener("click", () => {
-    htmlCode.style.textAlign = "center";
+    textAlign("center");
+    // htmlCode.style.textAlign = "center";
     updateHtmlEditor();
     savetextEditorContent();
     saveHtmlCode();
@@ -140,6 +147,7 @@ let newDoc = document.querySelector("#newDoc");
 
   alignLeft.addEventListener("click", () => {
     writingArea.style.textAlign = "left";
+    textAlign("left");
     updateHtmlEditor();
     savetextEditorContent();
     saveHtmlCode();
@@ -147,6 +155,7 @@ let newDoc = document.querySelector("#newDoc");
 
   alignJustify.addEventListener("click", () => {
     writingArea.style.textAlign = "justify";
+    textAlign("full");
     updateHtmlEditor();
     savetextEditorContent();
     saveHtmlCode();
