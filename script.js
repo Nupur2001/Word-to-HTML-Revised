@@ -18,8 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
   let body = document.body;
   let HtmlEditorBox = document.querySelector(".HtmlEditorBox");
   let theme = localStorage.getItem("theme");
-let newDoc = document.querySelector("#newDoc");
-let para=document.querySelector('#para')
+  let newDoc = document.querySelector("#newDoc");
+  let para = document.querySelector("#para");
+  let alignLeftHtml = document.getElementById("alignLeftHtml");
+  let alignJustifyHtml = document.getElementById("alignJustifyHtml");
+  let alignCenterHtml = document.getElementById("alignCenterHtml");
+  let alignRightHtml = document.getElementById("alignRightHtml");
+  let cloneHtmlCode = document.querySelector("#cloneHtmlCode");
+
+  alignLeftHtml.addEventListener("click", () => {
+    htmlCode.style.textAlign = "left";
+  });
+  alignJustifyHtml.addEventListener("click", () => {
+    htmlCode.style.textAlign = "justify";
+  });
+  alignCenterHtml.addEventListener("click", () => {
+    htmlCode.style.textAlign = "center";
+  });
+  alignRightHtml.addEventListener("click", () => {
+    htmlCode.style.textAlign = "right";
+  });
+
+
+
 
   function updateHtmlEditor() {
     let textEntered = writingArea.innerHTML;
@@ -28,10 +49,7 @@ let para=document.querySelector('#para')
     savetextEditorContent();
   }
 
-
-
   // function alignLeft()
-
 
   // var menu = document.getElementById("headingTags");
   // menu.addEventListener("change", generateData);
@@ -127,12 +145,17 @@ let para=document.querySelector('#para')
     updateHtmlEditor();
     // }
   });
-    function textAlign(align) {
-      document.execCommand("justify" + align);
-    }
+
+  cloneHtmlCode.addEventListener('click',()=>{
+    document.execCommand('copy')
+  });
+  
+  function textAlign(align) {
+    document.execCommand("justify" + align);
+  }
 
   alignRight.addEventListener("click", () => {
-   textAlign("right")
+    textAlign("right");
     updateHtmlEditor();
     savetextEditorContent();
     saveHtmlCode();
@@ -225,14 +248,14 @@ let para=document.querySelector('#para')
     }
   });
 
-  newDoc.addEventListener('click',()=>{
+  newDoc.addEventListener("click", () => {
     writingArea.innerHTML = "";
     htmlCode.textContent = "";
-  })
+  });
 
-  para.addEventListener('click',()=>{
+  para.addEventListener("click", () => {
     htmlCode.textContent = `<p>${writingArea.innerHTML}</p>`;
-  })
+  });
 
   loadtextEditorContent();
   loadHtmlCode();
