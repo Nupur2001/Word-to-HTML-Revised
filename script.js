@@ -3,11 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let htmlCode = document.querySelector("#htmlCode");
   let optionButton = document.querySelectorAll(".optionButton");
   let advOptionButton = document.querySelectorAll(".advOptionButton");
-  // let alignButtons = document.querySelectorAll(".align");
-  // let scriptButtons = document.querySelectorAll(".script");
-  // let formatButtons = document.querySelectorAll(".format");
-  // let spacingButtons = document.querySelectorAll(".spacing");
-  let fontName = document.querySelector("#fontName");
   let fontSize = document.querySelector("#fontSize");
   let writingArea = document.querySelector("#textInput");
   let linkInsert = document.querySelector("#insertLink");
@@ -17,19 +12,43 @@ document.addEventListener("DOMContentLoaded", () => {
   let alignCenter = document.querySelector("#alignCenter");
   let alignRight = document.querySelector("#alignRight");
   let deleteText = document.querySelector("#deleteText");
+  let listOl = document.querySelector("#listOl");
+  let listUl = document.querySelector("#listUl");
   let switchInput = document.querySelector(".switch input");
   let body = document.body;
   let HtmlEditorBox = document.querySelector(".HtmlEditorBox");
   let theme = localStorage.getItem("theme");
 
+  function updateHtmlEditor() {
+    let textEntered = writingArea.innerHTML;
+    htmlCode.textContent = textEntered;
+    savetextEditorContent();
+  }
+  writingArea.addEventListener("keyup", updateHtmlEditor);
+
   function savetextEditorContent() {
-    // let textEntered = textInput.value;
-    localStorage.setItem("Text Entered", textInput.innerHTML);
+    localStorage.setItem("Text Entered", writingArea.innerHTML);
   }
   function loadtextEditorContent() {
-    let textEntered=localStorage.getItem("Text Entered");
-    textInput.value = textEntered;
+    let savedText=localStorage.getItem("Text Entered");
+    if (savedText) {
+      writingArea.innerHTML = savedText;
+    }
   }
+
+
+function saveHtmlCode(){
+  localStorage.setItem("HTML Code", htmlCode.textContent)
+} 
+function loadHtmlCode(){
+  let savedHtmlCode = localStorage.getItem("HTML Code");
+  if (savedHtmlCode) {
+    htmlCode.textContent = savedHtmlCode;
+  }
+}
+
+
+
 
   for (let i = 1; i <= 7; i++) {
     let option = document.createElement("option");
@@ -42,89 +61,113 @@ document.addEventListener("DOMContentLoaded", () => {
   function modifyText(command, defaultUi, value) {
     document.execCommand(command, defaultUi, value);
     updateHtmlEditor;
+     savetextEditorContent();
+    saveHtmlCode();
+
   }
 
   optionButton.forEach((button) => {
     button.addEventListener("click", () => {
       modifyText(button.id, false, null);
+      updateHtmlEditor();
       savetextEditorContent();
-      // loadtextEditorContent()
+    saveHtmlCode();
+
     });
   });
 
   advOptionButton.forEach((button) => {
     button.addEventListener("click", () => {
       modifyText(button.id, false, button.value);
+      updateHtmlEditor();
       savetextEditorContent();
-      // loadtextEditorContent()
+    saveHtmlCode();
+
     });
   });
 
   advOptionButton.forEach((button) => {
     button.addEventListener("change", () => {
       modifyText(button.id, false, button.value);
+      updateHtmlEditor();
       savetextEditorContent();
-      // loadtextEditorContent()
+    saveHtmlCode();
+
     });
   });
 
   clone.addEventListener("click", () => {
     // if (writingArea.select()) {
     document.execCommand("copy");
+    updateHtmlEditor();
     // }
   });
 
   alignRight.addEventListener("click", () => {
     writingArea.style.textAlign = "right";
+    htmlCode.textContent=document.execCommand("JustifyRight");
+    updateHtmlEditor();
     savetextEditorContent();
-    // loadtextEditorContent()
+    saveHtmlCode();
   });
 
-  alignRight.addEventListener("click", () => {
-    htmlCode.style.textAlign = "right";
+  alignCenter.addEventListener("click", () => {
+    htmlCode.style.textAlign = "center";
+    updateHtmlEditor();
     savetextEditorContent();
-    // loadtextEditorContent();
+    saveHtmlCode();
   });
 
   alignLeft.addEventListener("click", () => {
     writingArea.style.textAlign = "left";
+    updateHtmlEditor();
     savetextEditorContent();
-    // loadtextEditorContent()
+    saveHtmlCode();
   });
 
   alignJustify.addEventListener("click", () => {
     writingArea.style.textAlign = "justify";
+    updateHtmlEditor();
     savetextEditorContent();
-    // loadtextEditorContent()
+    saveHtmlCode();
   });
 
   // $("#alignJustify").click(function () {
   //   $("writingArea").css("textAlign","justify");
   //   savetextEditorContent();
-  //   // loadtextEditorContent();
   // });
 
   alignCenter.addEventListener("click", () => {
     writingArea.style.textAlign = "center";
+    updateHtmlEditor();
     savetextEditorContent();
-    // loadtextEditorContent()
+    saveHtmlCode();
   });
 
-  linkInsert.addEventListener("click", () => {
-    let userLink = prompt("Enter a URL");
-    if (/http/i.test(userLink)) {
-      modifyText(linkInsert.id, false, userLink);
-    } else {
-      userLink = "http://" + userLink;
-      modifyText(linkInsert.id, false, userLink);
-    }
-  });
+  // linkInsert.addEventListener("click", () => {
+  //   let userLink = prompt("Enter a URL");
+  //   if (/http/i.test(userLink)) {
+  //     modifyText(linkInsert.id, false, userLink);
+  //   } else {
+  //     userLink = "http://" + userLink;
+  //     modifyText(linkInsert.id, false, userLink);
+  //   }
+  //   updateHtmlEditor();
+  // });
 
   deleteText.addEventListener("click", () => {
     writingArea.innerHTML = "";
     // $("writingArea").html="";
+    updateHtmlEditor();
     savetextEditorContent();
-    // loadtextEditorContent();
+  });
+
+  listOl.addEventListener("click", () => {
+    document.execCommand("insertorderedlist");
+  });
+
+  listUl.addEventListener("click", () => {
+    document.execCommand("insertunorderedlist");
   });
 
   if (theme === "nightmode") {
@@ -152,15 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  function updateHtmlEditor() {
-
-    htmlCode.textContent = `<p>${writingArea.innerHTML}</p>`;
-    // htmlCode.innerHTML = writingArea.textContent;
-    // spanTagText.appendChild(htmlCode.innerHTML)
-    // console.log(writingArea.textContent);
-    // console.log(`<p>${writingArea.innerHTML}</p>`);
-  }
-  writingArea.addEventListener("keyup", updateHtmlEditor);
-
   loadtextEditorContent();
+  loadHtmlCode();
 });
