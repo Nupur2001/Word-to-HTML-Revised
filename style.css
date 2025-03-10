@@ -37,7 +37,9 @@ body {
 .editorBox {
   background-color: #fff;
   /* width: 90vmin; */
-  width: 100vmin;
+  /* width: 100vmin; */
+      width: 45vw;
+        height: 70vh;
   padding: 50px 30px;
   /* position: absolute;
     transform: translate(-50%, -50%);
@@ -108,8 +110,9 @@ input[type="color"]::-webkit-color-swatch {
   margin-top: 10px;
   border: 1px solid #ddd;
   padding: 20px;
-  height: 50vh;
+  height: 40vh;
   font-size: 23px;
+  overflow: scroll;
 }
 
 ol li {
@@ -124,6 +127,7 @@ ul li {
     padding: 20px;
     height: 50vh;
     font-size: 23px;
+    overflow: scroll;
 }
 .switch {
     position: relative;
@@ -195,12 +199,6 @@ body.nightmode {
 body.nightmode .editorBox {
     color: white;
 }
-
-/* body.nightmode .iconContainer {
-    background-color: #222;
-    border: 1px solid white;
-} */
-
 body.nightmode .options {
     color: white;
 }
@@ -209,15 +207,3 @@ body.nightmode .editorBox {
     background-color: #222;
     color: white;
 }
-
-
-
-
-/* 
-.switch input:not(:checked) body{
-  background-color:white ;
-  color: #000;
-} */
-/* .active {
-    background-color: #e0e9ff;
-} */
