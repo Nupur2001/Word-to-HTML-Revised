@@ -259,6 +259,25 @@ document.addEventListener("DOMContentLoaded", () => {
     saveHtmlCode();
   });
 
+  $("#alignLeftHtml").click(function () {
+    $("#htmlCode").css("textAlign", "left");
+  });
+  $("#alignRightHtml").click(function () {
+    $("#htmlCode").css("textAlign", "right");
+  });
+
+  $("#alignCenterHtml").click(function () {
+    $("#htmlCode").css("textAlign", "center");
+  });
+
+  $("#alignJustifyHtml").click(function () {
+    $("#htmlCode").css("textAlign", "justify");
+  });
+
+  $("#cloneHtmlCode").click(function () {
+    document.execCommand("copy");
+  });
+
   loadtextEditorContent();
   loadHtmlCode();
 });
